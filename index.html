@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Chat-App</title>
+    <style>
+      </style>
+ </head>
+<body>
+  <div id="login-area">
+  <div id="login-text">
+   <h1>Login Page</h1>
+   <div id="login-form-area">
+  <form id="login-form">
+ <input id="username" type="text" placeholder="Username" autocomplete="off">
+ <input  id="login-submit" type="submit" value="Login">
+  </form>
+</div>
+</div>
+</div>
+<div id="chat-area">
+<div id="users-area">
+<div id="online-users-text">
+<h1>Online users:</h1>
+ </div>
+ <div id="online-users">
+<ul id="users">
+<li></li>
+<li></li>
+ </ul>
+</div>
+ </div>
+<div id="message-area">
+ <div id="display-message-area">
+  <ul id="messages"><li></li>
+   <li> </li>
+   <li> </li>
+ </ul></div>
+ <div id="message-form-area">
+ <form id="message-form">
+ <input id="message" type="text" placeholder="Type your message........." autocomplete="off">
+  <input id="message-submit" type="submit" value="SEND">
+  </form>
+  </div>
+  </div>
+  </div> <!--when user enters submit we are showing this -->
+</body>
+<script type="text/javascript">
+      var socket = io();
+      //this io here is different from whatever the variable we using inside the script.js file
+   // by using io here we are basically connecting to the server and we sending message to the server
+ //which is present inside io method in server.js file
+ function updateUser(list){ 
+  for(var i=0;i<list.length;i++){
+  //we are appending this user name to the above online users list
+  $("#users").append("<li><b> " + list [i] +  " </b> </li>");
+}
+ }
+$("#login-form").submit(function(){ //this function executes only when user enters submit button
+  event.preventDefault();//using this to prevent default searching in the browser when we hit submit button
+  if($("#username").val() == "" || $("#usermame").val()==" "){//we are checking username is empty string or a space
+    alert("Invalid username");//if condition is true then we alerting this
+}
+else{
+  $username = $("#username").val(); //whatever user enters his username we are assining it to a variable
+  $("#login-area").hide();
+    $("#chat-area").show();
+    $("#messages").html("");//when new user conncts we are not displaying old messages
+  
+    socket.emit("has connected", $username); //here has connected is a custom event and we are emitting this event to the server
+
+}
+});
+$("#message-form").submit(function(event){
+event.preventDefault();//using this we are preventing searching at the top when we enter submit
+//we are preventing giving request to the http server when we enter submit
+if($("#message").val()== "" || $("#message").val()==" " ){
+  alert("you cannot send empty messages");
+}
+else{
+  socket.emit("new message",{ username:$username ,message:$("#message").val()});
+  
+  $("#message").val("");
+  //here we will be emitting an event that says new message to the http server
+  //we are also passing value of that message
+ 
+}
+});
+//we are handling the event that came from the server to all of the sockets
+socket.on("has connected",function(data){//data is now contaning username and user array
+  $("#users").html("");//we are saying remove everything  between users list when user connects and then again list the users
+  
+  updateUser(data.usersList);
+$("#messages").append("<li><i><b> " + data.username  +" </b></i>has connected</li>");
+});
+ 
+socket.on("has disconnected",function(data){
+  $("#users").html("");//remove everything in the users list when the user connects and then relist the users that are remaning
+  updateUser(data.usersList);
+  $("#messages").append("<li><i><b> " + data.username  +" </b></i>has disconnected</li>");//when a user disconnects we are displaying his name
+//we cant use $username because when some other user disconnects also it will show currently loginned user
+});
+socket.on("new message",function( data){
+  $("#messages").append("<li><b>"+ data.username+ "</b>:" + data.message + "</li>");
+
+});
+
+</script>
+    
+</html>

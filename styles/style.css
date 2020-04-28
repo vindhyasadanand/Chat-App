@@ -1,0 +1,164 @@
+ html{
+   height: 100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+ }
+ body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid transparent;
+  overflow: hidden;
+
+}
+#login-area{
+  width: 500px;
+  height: 300px;
+  border:1px solid #000;
+  margin: auto;
+  margin-top: 150px;
+}
+#login-area #login-text{
+  width: 100%;
+  margin-top: 70px;
+  text-align:center ;
+  
+}
+#login-area #login-form-area{
+  width: 100%;
+  margin-top: 40px;
+  text-align: center;
+
+}
+#login-area #login-form-area #login-form #username{
+  height: 50px;
+  width: 300px;
+  padding: 5px 0px ;
+  font-size: 26px;
+  outline: none;
+  outline-offset: 0;
+
+}
+#login-area #login-form-area #login-form #login-submit{
+  font-size: 26px;
+  background-color: transparent;
+  border: 1px solid #000;
+  height: 52px;
+  width: 100px;
+  cursor: pointer;
+  outline: none;
+  outline-offset: 0;
+}
+#login-area #login-form-area #login-form #login-submit:hover{
+  color: #fff;
+  background-color: #000;
+  }
+  /*------------------for chat area--------------*/
+#chat-area{
+  display: none;
+  height: 100%;
+  width: 100%;
+  
+}
+#chat-area #users-area{
+  height: 100%;
+  width: 20%;
+  border-top: 1px solid transparent;
+  border-right: 1px solid #000;
+  float: left;
+  background-color: #dddddd;
+} 
+#chat-area #users-area #online-users-text{
+  margin: 0;
+  padding: 0;
+  margin-top: 100px;
+  text-align: center;
+
+}
+#chat-area #users-area #online-users-text h1{
+  margin: 0;
+  padding: 0;
+
+}
+#chat-area #users-area #online-users{
+  margin-top: 50px;
+  
+}
+#chat-area #users-area #online-users #users{
+  padding: 0;
+  margin: 0;
+text-align: center;
+  
+}
+#chat-area #users-area #online-users #users li{
+  list-style-type: none;
+  font-weight: bold;
+  margin-top: 10px;
+}
+#chat-area #message-area{
+  width: calc(80% - 1px);
+  height: 100%;
+  background-color: #aaaaaa;
+  float: right;
+}
+#chat-area #message-area #display-message-area{
+  width:100%;
+  height: 90%;
+
+  border-top: 1px solid transparent;
+
+}
+#chat-area #message-area #display-message-area #messages{
+  margin: 0;
+  padding: 0;
+  
+}
+#chat-area #message-area #display-message-area #messages li{
+  list-style-type: none;
+  padding: 10px 10px;
+  
+
+
+}
+#chat-area #message-area #display-message-area #messages li:nth-child(odd){
+  background-color: #eeeeee;/***we used nth child property to show different background color*****/
+
+}
+#chat-area #message-area  #message-form-area{
+  width: 100%;
+  height: 10%;
+  border-bottom: 1px solid #000;
+}
+#chat-area #message-area  #message-form-area #message-form #message{
+  height: 60px;
+  width: 90%;
+  font-size: 20px;
+  padding: 0px 5px;
+  outline-offset: 0;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  border: 0px;
+  border: 1px solid #000;
+}
+#chat-area #message-area  #message-form-area #message-form #message::placeholder{
+  color: #eeeeee;
+
+}
+#chat-area #message-area  #message-form-area #message-form #message-submit{
+  height: 60px;
+  width: 85px;
+  border: 1px solid transparent;
+  font-size: 26px;
+  cursor: pointer;
+}
+#chat-area #message-area  #message-form-area #message-form #message-submit:hover{
+  color: #fff;
+  background-color: black;
+ 
+}
+
